@@ -1,0 +1,47 @@
+@page "/Graph/{values;colors; title}"
+<div style="color:#dddddd">
+    @title
+</div>
+<svg width="@(n*25+20)" height="120">
+    @for (var i=0; i<n; i++) {
+        <rect x="@(10+i*20)"
+              y="@(120-h[i])"
+              width="15"
+              height="@(h[i])"
+              style="fill:@(col[i])" />
+    }
+    @for(var i=0; i<n; i++) {
+        <text>
+        <text x="@(15+i*20)"
+              y="@(117-h[i])"
+              text-anchor="middle"> @v[i]</text>
+        </text>
+    }
+</svg>
+@code {
+    [Parameter]
+    public string title {get; set;}
+    [Parameter]
+    public string values {get; set;}
+    [Parameter]
+    public string colors {get; set;}
+    private String[] val = null;
+    private String[] col = null;
+    private int n = 0;
+    private int[] v,h;
+
+    protected override void OnInitialized()
+    {
+        title = title ?? "Graph of something interesting";
+        values = values ?? "0,1,2";
+        colors = colors ?? "#ff0000, #00ff00, #0000ff";
+        val = values.Split(",");
+        col = colors.Split(",");
+        n = Math.Min(val.Length,col.Length);
+        v = values.Split(",").Select(Int32.Parse).ToArray();
+        h = new int[v.Length];
+        for(int i=0; i<v.Length; i++)
+            h[i]=(int) (v[i]*100)/v.Max();
+    }
+
+}
