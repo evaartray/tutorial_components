@@ -1,0 +1,21 @@
+@page "/CountrySelector/{countries}"
+
+<div>
+    <select name="country" @onchange="SelectCountry">
+         <option value="Show All">Show All</option>
+        @for (var i=0; i<countries.Count(); i++) {
+            <option value="@(countries[i])">@(countries[i])</option>
+        }
+        </select>
+</div>
+
+@code {
+
+    [Parameter]
+    public EventCallback<ChangeEventArgs> SelectCountry { get; set; }
+    
+    [Parameter]
+    public List<string> countries { get; set; }
+    
+    
+}

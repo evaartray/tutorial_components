@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using tutorial_components.Data;
+using System.Globalization;
 
 namespace tutorial_components
 {
